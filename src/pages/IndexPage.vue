@@ -11,14 +11,16 @@
       </q-input>
     </div>
 
-    <div class="col text-white text-center">
-      <div class="text-h4 text-weight-light">Realengo</div>
-      <div class="text-h6 text-weight-light">Nublado</div>
-      <div class="text-h1 text-weight-thin q-my-lg relative-position">
-        <span>24</span>
-        <span class="text-h4 relative-position degree">&deg;</span>
+    <template v-if="weatherData">
+      <div class="col text-white text-center">
+        <div class="text-h4 text-weight-light">Realengo</div>
+        <div class="text-h6 text-weight-light">Nublado</div>
+        <div class="text-h1 text-weight-thin q-my-lg relative-position">
+          <span>24</span>
+          <span class="text-h4 relative-position degree">&deg;</span>
+        </div>
       </div>
-    </div>
+    </template>
 
     <div class="col citybg"></div>
   </q-page>
@@ -34,7 +36,7 @@ export default {
   data() {
     return {
       search: '',
-      weatherDate: null,
+      weatherData: null,
     };
   },
 };
@@ -46,7 +48,7 @@ export default {
 .degree
   top: -42px
 .citybg
-  background: url(../assets/silhouette2.png)
+  background: url(../assets/silhouette2.png) no-repeat center bottom -59px
   background-size: contain
-  background-position: center bottom -48px
+  background-attachment: fixed
 </style>
