@@ -10,6 +10,14 @@
 
 const { configure } = require('quasar/wrappers');
 
+module.exports = function (/* ctx */) {
+  return {
+    // ...
+    plugins: ['axios'],
+    // ...
+  };
+};
+
 module.exports = configure(function (/* ctx */) {
   return {
     eslint: {

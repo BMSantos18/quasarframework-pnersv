@@ -46,17 +46,41 @@ import { ref } from 'vue';
 </script>
 
 <script>
+import axios from 'axios';
+
 export default {
-  name: 'PageIndex',
+  name: 'IndexPage',
   data() {
     return {
-      search: '',
+      apiUrl: 'https://api.openweathermap.org/data/2.5/weather',
+      apiID: '633908cd9a8f16838ef2880e46065870',
+      lat: null,
+      lon: null,
       weatherData: null,
+      search: '',
     };
   },
   methods: {
     getLocation() {
-      console.log('getLocation');
+      navigator.geolocation.getCurrentPosition((position) => {
+        console.log('position: ', position);
+        this.lat = position.coords.latitude;
+        this.lon = position.coords.longitude;
+        this.getWeatherByCoords();
+      });
+    },
+    getWeatherByCoords() {
+      axios
+        .get(
+          `${this.apiUrl}?lat=${this.lat}&lon=${this.lon}&appid=${this.apiID}&units=metric`
+        )
+        .then((response) => {
+          console.log('response: ', response.data);
+          this.weatherData = response.data;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     },
   },
 };
