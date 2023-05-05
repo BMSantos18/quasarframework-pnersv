@@ -22,6 +22,16 @@
       </div>
     </template>
 
+    <template v-else>
+      <div class="col column text-center text-white">
+        <div class="col text-h2 text-weight-thin">
+          Tempo HOJE<br />
+          <div class="col text-h6 text-weight-thin text-right">by ILLIMTAR</div>
+        </div>
+      </div>
+      <q-btn square color="black" icon="my_location" class="col" flat />
+    </template>
+
     <div class="col citybg"></div>
   </q-page>
 </template>
@@ -48,7 +58,13 @@ export default {
 .degree
   top: -42px
 .citybg
-  background: url(../assets/silhouette2.png) no-repeat center bottom -59px
+  background: url(../assets/silhouette2.png) no-repeat center bottom
+  z-index: 999
   background-size: contain
   background-attachment: fixed
+
+.col.text-right
+  display: flex
+  align-items: center
+  justify-content: flex-end
 </style>
