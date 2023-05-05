@@ -6,11 +6,10 @@
           <q-icon name="place" />
         </template>
         <template v-slot:append>
-          <q-btn round dense flat icon="search" />
+          <q-btn round dense flat icon="search" @click="getLocation" />
         </template>
       </q-input>
     </div>
-
     <template v-if="weatherData">
       <div class="col text-white text-center">
         <div class="text-h4 text-weight-light">Realengo</div>
@@ -26,10 +25,16 @@
       <div class="col column text-center text-white">
         <div class="col text-h2 text-weight-thin">
           Tempo HOJE<br />
-          <div class="col text-h6 text-weight-thin text-right">by ILLIMTAR</div>
+          <div class="col text-h6 text-weight-thin alinha">by BMSantos</div>
         </div>
       </div>
-      <q-btn square color="black" icon="my_location" class="col" flat />
+      <q-btn
+        square
+        color="black"
+        icon="my_location"
+        label="Onde estou?"
+        @click="getLocation"
+      />
     </template>
 
     <div class="col citybg"></div>
@@ -49,22 +54,24 @@ export default {
       weatherData: null,
     };
   },
+  methods: {
+    getLocation() {
+      console.log('getLocation');
+    },
+  },
 };
 </script>
 
 <style lang="sass">
 .q-page
   background: linear-gradient(to top, #73c8a9, #373b44)
+
 .degree
   top: -42px
+
 .citybg
   background: url(../assets/silhouette2.png) no-repeat center bottom
   z-index: 999
   background-size: contain
   background-attachment: fixed
-
-.col.text-right
-  display: flex
-  align-items: center
-  justify-content: flex-end
 </style>
