@@ -6,7 +6,7 @@
           <q-icon name="place" />
         </template>
         <template v-slot:append>
-          <q-btn round dense flat icon="search" @click="getLocation" />
+          <q-btn @click="getLocation" round dense flat icon="search" />
         </template>
       </q-input>
     </div>
@@ -29,11 +29,11 @@
         </div>
       </div>
       <q-btn
+        @click="getLocation"
         square
         color="black"
         icon="my_location"
         label="Onde estou?"
-        @click="getLocation"
       />
     </template>
 
