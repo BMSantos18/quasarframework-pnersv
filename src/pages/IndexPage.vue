@@ -20,25 +20,24 @@
       </div>
     </div>
 
-    <div class="col citybg">
-      <q-img
-        class="my-image"
-        src="../assets/silhouette2.png"
-        alt="Silhueta cidade BG"
-        :style="{
-          'background-size': 'contain',
-          'background-position': 'center',
-          bottom: '-23px',
-        }"
-      />
-    </div>
+    <div class="col citybg"></div>
   </q-page>
 </template>
 
 <script setup>
 import { ref } from 'vue';
+</script>
 
-const search = ref('');
+<script>
+export default {
+  name: 'PageIndex',
+  data() {
+    return {
+      search: '',
+      weatherDate: null,
+    };
+  },
+};
 </script>
 
 <style lang="sass">
@@ -46,6 +45,8 @@ const search = ref('');
   background: linear-gradient(to top, #73c8a9, #373b44)
 .degree
   top: -42px
-.my-image
-  width: 100%
+.citybg
+  background: url(../assets/silhouette2.png)
+  background-size: contain
+  background-position: center bottom -48px
 </style>
