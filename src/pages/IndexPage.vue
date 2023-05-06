@@ -94,7 +94,7 @@ export default {
   top: -42px
 
 .citybg
-  background: url(../assets/silhouette2.png) no-repeat center bottom
+  background: url(../assets/silhouette2.png) no-repeat center bottom -62px
   z-index: 999
   background-size: contain
   background-attachment: fixed
