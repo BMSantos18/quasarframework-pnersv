@@ -1,5 +1,5 @@
 <template>
-  <q-page class="flex column" :class="bgClass">
+  <q-page class="flex column">
     <div class="col q-pt-lg q-px-md">
       <q-input
         v-model="search"
@@ -33,7 +33,6 @@
         />
       </div>
     </template>
-
     <template v-else>
       <div class="col column text-center text-white">
         <div class="col text-h2 text-weight-thin">
@@ -49,18 +48,14 @@
         label="Onde estou?"
       />
     </template>
-
     <div class="col citybg"></div>
   </q-page>
 </template>
-
 <script setup>
 import { ref } from 'vue';
 </script>
-
 <script>
 import axios from 'axios';
-
 export default {
   name: 'IndexPage',
   data() {
@@ -74,26 +69,13 @@ export default {
       lang: 'pt_br',
     };
   },
-
-computed: {
-  bgClass (){
-    if(this.weatherData){
-      if(this.weatherData.weather[0].icon.endsWith('n')){
-        return 'bg-night'
-      }else {
-        return 'bg-day'
-      }
-    }
-  },
-}
-
   methods: {
     getLocation() {
       navigator.geolocation.getCurrentPosition((position) => {
         this.lat = position.coords.latitude;
         this.lon = position.coords.longitude;
-        this.getWeatherByCoords(),
-      }),
+        this.getWeatherByCoords();
+      });
     },
     getWeatherByCoords() {
       axios
@@ -108,7 +90,6 @@ computed: {
           console.error(error);
         });
     },
-
     getWeatherBySearch() {
       axios
         .get(
@@ -125,20 +106,16 @@ computed: {
   },
 };
 </script>
-
 <style lang="sass">
 .q-page
   background: linear-gradient(to top, #73c8a9, #373b44)
-
 .degree
   top: -42px
-
 .citybg
-  background: url(../assets/silhouette2.png) no-repeat center bottom -2px
+  background: url(../assets/silhouette2.png) no-repeat center bottom -62px
   z-index: 999
   background-size: contain
   background-attachment: fixed
-
 .maiuscula
   text-transform: capitalize
 </style>
