@@ -76,7 +76,15 @@ export default {
   },
 
 computed: {
-  bgClass
+  bgClass (){
+    if(this.weatherData){
+      if(this.weatherData.weather[0].icon.endsWith('n')){
+        return 'bg-night'
+      }else {
+        return 'bg-day'
+      }
+    }
+  },
 }
 
   methods: {
@@ -84,8 +92,8 @@ computed: {
       navigator.geolocation.getCurrentPosition((position) => {
         this.lat = position.coords.latitude;
         this.lon = position.coords.longitude;
-        this.getWeatherByCoords();
-      });
+        this.getWeatherByCoords(),
+      }),
     },
     getWeatherByCoords() {
       axios
