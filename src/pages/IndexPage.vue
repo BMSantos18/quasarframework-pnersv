@@ -1,12 +1,18 @@
 <template>
   <q-page class="flex column">
     <div class="col q-pt-lg q-px-md">
-      <q-input v-model="search" label="Procure aqui" dark borderless>
+      <q-input
+        v-model="search"
+        @keyup.enter="getWeatherBySearch"
+        label="Procure aqui"
+        dark
+        borderless
+      >
         <template v-slot:prepend>
           <q-icon name="place" />
         </template>
         <template v-slot:append>
-          <q-btn @click="getLocation" round dense flat icon="search" />
+          <q-btn @click="getWeatherBySearch" round dense flat icon="search" />
         </template>
       </q-input>
     </div>
@@ -15,6 +21,9 @@
         <div class="text-h4 text-weight-light">{{ weatherData.name }}</div>
         <div class="text-h6 text-weight-light">
           {{ weatherData.weather[0].main }}
+        </div>
+        <div class="text-h6 text-weight-light">
+          <q-translate {{ weatherData.weather[0].main }} />
         </div>
         <div class="text-h1 text-weight-thin q-my-lg relative-position">
           <span>{{ Math.round(weatherData.main.temp) }}</span>
@@ -43,6 +52,8 @@
         label="Onde estou?"
       />
     </template>
+
+    <Q-translate {{ weatherData.weather[0].main }} />
 
     <div class="col citybg"></div>
   </q-page>
@@ -81,6 +92,18 @@ export default {
         .get(
           `${this.apiUrl}?lat=${this.lat}&lon=${this.lon}&appid=${this.apiID}&units=metric`
         )
+        .then((response) => {
+          console.log('response: ', response.data);
+          this.weatherData = response.data;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+
+    getWeatherBySearch() {
+      axios
+        .get(`${this.apiUrl}?q=${this.search}&appid=${this.apiID}&units=metric`)
         .then((response) => {
           console.log('response: ', response.data);
           this.weatherData = response.data;
