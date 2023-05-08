@@ -1,5 +1,5 @@
 <template>
-  <q-page class="flex column">
+  <q-page class="flex column" :class="bgClass">
     <div class="col q-pt-lg q-px-md">
       <q-input
         v-model="search"
@@ -69,6 +69,7 @@ export default {
       lang: 'pt_br',
     };
   },
+
   methods: {
     getLocation() {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -112,7 +113,7 @@ export default {
 .degree
   top: -42px
 .citybg
-  background: url(../assets/silhouette2.png) no-repeat center bottom -62px
+  background: url(../assets/silhouette2.png) no-repeat center bottom -2px
   z-index: 999
   background-size: contain
   background-attachment: fixed
