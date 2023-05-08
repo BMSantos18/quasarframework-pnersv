@@ -22,9 +22,6 @@
         <div class="text-h6 text-weight-light">
           {{ weatherData.weather[0].main }}
         </div>
-        <div class="text-h6 text-weight-light">
-          <q-translate {{ weatherData.weather[0].main }} />
-        </div>
         <div class="text-h1 text-weight-thin q-my-lg relative-position">
           <span>{{ Math.round(weatherData.main.temp) }}</span>
           <span class="text-h4 relative-position degree">&deg;C</span>
@@ -52,8 +49,6 @@
         label="Onde estou?"
       />
     </template>
-
-    <Q-translate {{ weatherData.weather[0].main }} />
 
     <div class="col citybg"></div>
   </q-page>
