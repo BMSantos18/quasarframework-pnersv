@@ -18,9 +18,9 @@
     </div>
     <template v-if="weatherData">
       <div class="col text-white text-center">
-        <div class="text-h4 text-weight-light">{{ weatherData.name }}</div>
-        <div class="text-h6 text-weight-light">
-          {{ weatherData.weather[0].main }}
+        <div class="text-h3 text-weight-light">{{ weatherData.name }}</div>
+        <div class="text-h6 text-weight-light maiuscula">
+          {{ weatherData.weather[0].description }}
         </div>
         <div class="text-h1 text-weight-thin q-my-lg relative-position">
           <span>{{ Math.round(weatherData.main.temp) }}</span>
@@ -71,12 +71,12 @@ export default {
       lon: null,
       weatherData: null,
       search: '',
+      lang: 'pt_br',
     };
   },
   methods: {
     getLocation() {
       navigator.geolocation.getCurrentPosition((position) => {
-        console.log('position: ', position);
         this.lat = position.coords.latitude;
         this.lon = position.coords.longitude;
         this.getWeatherByCoords();
@@ -85,7 +85,7 @@ export default {
     getWeatherByCoords() {
       axios
         .get(
-          `${this.apiUrl}?lat=${this.lat}&lon=${this.lon}&appid=${this.apiID}&units=metric`
+          `${this.apiUrl}?lat=${this.lat}&lon=${this.lon}&appid=${this.apiID}&lang=${this.lang}&units=metric`
         )
         .then((response) => {
           console.log('response: ', response.data);
@@ -98,7 +98,9 @@ export default {
 
     getWeatherBySearch() {
       axios
-        .get(`${this.apiUrl}?q=${this.search}&appid=${this.apiID}&units=metric`)
+        .get(
+          `${this.apiUrl}?q=${this.search}&lang=${this.lang}&appid=${this.apiID}&units=metric`
+        )
         .then((response) => {
           console.log('response: ', response.data);
           this.weatherData = response.data;
@@ -123,4 +125,7 @@ export default {
   z-index: 999
   background-size: contain
   background-attachment: fixed
+
+.maiuscula
+  text-transform: capitalize
 </style>
