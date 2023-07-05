@@ -1,8 +1,16 @@
 <template>
   <div>
-    <h1>Página inicial</h1>
-      <q-router-link to="/IndexPage.vue">
-        <q-btn color="primary" label="Primary" />
-      </q-router-link>
+    <h3>Página inicial</h3>
+    <q-btn color="primary" label="Weather App" @click="redirecionar" />
   </div>
 </template>
+
+<script>
+export default {
+  methods: {
+    redirecionar() {
+      this.$router.push('/weather-app');
+    },
+  },
+};
+</script>

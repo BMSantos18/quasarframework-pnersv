@@ -71,7 +71,7 @@ import { ref } from 'vue';
 <script>
 import axios from 'axios';
 export default {
-  name: 'IndexPage',
+  name: 'WeatherApp',
   data() {
     return {
       apiUrl: 'https://api.openweathermap.org/data/2.5/weather',
