@@ -1,69 +1,80 @@
 <template>
   <!-- Código abaixo abre a pagina começando com  organização em COLUNAS -flex column- -->
-  <q-page class="flex column" :class="bgClass">
-    <!-- Alinhamento na parte superior em telas grandres /  Alinhamento horizontal em tela média -->
-    <div class="col q-pt-lg q-px-md">
-      <!-- Campo de texto personalizável para fazer a busca do método de Busca por Nome na API -->
-      <!-- DARK -> permite que o campo seja definido para campos escuros, alterando suas próprias cores -->
-      <q-input
-        v-model="search"
-        @keyup.enter="getWeatherBySearch"
-        label="Procure aqui"
-        dark
-        borderless
-      >
-        <!-- Faz com que o ícone apareça antes do campo de texto -->
-        <template v-slot:prepend>
-          <q-icon name="place" />
+  <q-layout view="lHh Lpr lFf">
+    <!-- Resto do conteúdo do layout -->
+    <q-page-container>
+      <q-page class="flex column" :class="bgClass">
+        <!-- Alinhamento na parte superior em telas grandres /  Alinhamento horizontal em tela média -->
+        <div class="col q-pt-lg q-px-md">
+          <!-- Campo de texto personalizável para fazer a busca do método de Busca por Nome na API -->
+          <!-- DARK -> permite que o campo seja definido para campos escuros, alterando suas próprias cores -->
+          <q-input
+            v-model="search"
+            @keyup.enter="getWeatherBySearch"
+            label="Procure aqui"
+            dark
+            borderless
+          >
+            <!-- Faz com que o ícone apareça antes do campo de texto -->
+            <template v-slot:prepend>
+              <q-icon name="place" />
+            </template>
+            <!-- Faz com que o ícone apareça após o campo de texto -->
+            <template v-slot:append>
+              <!-- No clique do botão / Icone da LUPA, ele ativa o METODO de busca -->
+              <q-btn
+                @click="getWeatherBySearch"
+                round
+                dense
+                flat
+                icon="search"
+              />
+            </template>
+          </q-input>
+        </div>
+        <!-- Verificação se existe dados do Tempo Existentes. Se existe, vai colocar os dados de NOME, TEMPERATURA, DESCRIÇÃO DO TEMPO na tela -->
+        <template v-if="weatherData">
+          <div class="col text-white text-center">
+            <div class="text-h3 text-weight-light">{{ weatherData.name }}</div>
+            <div class="text-h6 text-weight-light maiuscula">
+              {{ weatherData.weather[0].description }}
+            </div>
+            <!-- Temperatura em celsius sendo arredondada para valor inteiro -->
+            <div class="text-h1 text-weight-thin q-my-lg relative-position">
+              <span>{{ Math.round(weatherData.main.temp) }}</span>
+              <!-- Simbolo de Graus com um C posicionado ao topo da DIV  -->
+              <span class="text-h4 relative-position degree">&deg;C</span>
+            </div>
+          </div>
+          <!-- Imagem sendo buscada pela API, onde mostra o tipo de tempo no local informado -->
+          <div class="col text-center">
+            <img
+              :src="`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`"
+            />
+          </div>
         </template>
-        <!-- Faz com que o ícone apareça após o campo de texto -->
-        <template v-slot:append>
-          <!-- No clique do botão / Icone da LUPA, ele ativa o METODO de busca -->
-          <q-btn @click="getWeatherBySearch" round dense flat icon="search" />
+        <!-- Caso NÃO exista dados do tempo. Uma tela padrão para instruir o usuário no que fazer -->
+        <template v-else>
+          <!-- Colocação e colocaração do texto pre-definidos de acordo com o fundo previamente escolhido -->
+          <div class="col column text-center text-white">
+            <div class="col text-h2 text-weight-thin">
+              Tempo HOJE<br />
+              <div class="col text-h6 text-weight-thin alinha">by BMSantos</div>
+            </div>
+          </div>
+          <!-- Pega sua localização de acordo com a API padrão do QUASAR -->
+          <q-btn
+            @click="getLocation"
+            square
+            color="black"
+            icon="my_location"
+            label="Onde estou?"
+          />
         </template>
-      </q-input>
-    </div>
-    <!-- Verificação se existe dados do Tempo Existentes. Se existe, vai colocar os dados de NOME, TEMPERATURA, DESCRIÇÃO DO TEMPO na tela -->
-    <template v-if="weatherData">
-      <div class="col text-white text-center">
-        <div class="text-h3 text-weight-light">{{ weatherData.name }}</div>
-        <div class="text-h6 text-weight-light maiuscula">
-          {{ weatherData.weather[0].description }}
-        </div>
-        <!-- Temperatura em celsius sendo arredondada para valor inteiro -->
-        <div class="text-h1 text-weight-thin q-my-lg relative-position">
-          <span>{{ Math.round(weatherData.main.temp) }}</span>
-          <!-- Simbolo de Graus com um C posicionado ao topo da DIV  -->
-          <span class="text-h4 relative-position degree">&deg;C</span>
-        </div>
-      </div>
-      <!-- Imagem sendo buscada pela API, onde mostra o tipo de tempo no local informado -->
-      <div class="col text-center">
-        <img
-          :src="`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`"
-        />
-      </div>
-    </template>
-    <!-- Caso NÃO exista dados do tempo. Uma tela padrão para instruir o usuário no que fazer -->
-    <template v-else>
-      <!-- Colocação e colocaração do texto pre-definidos de acordo com o fundo previamente escolhido -->
-      <div class="col column text-center text-white">
-        <div class="col text-h2 text-weight-thin">
-          Tempo HOJE<br />
-          <div class="col text-h6 text-weight-thin alinha">by BMSantos</div>
-        </div>
-      </div>
-      <!-- Pega sua localização de acordo com a API padrão do QUASAR -->
-      <q-btn
-        @click="getLocation"
-        square
-        color="black"
-        icon="my_location"
-        label="Onde estou?"
-      />
-    </template>
-    <div class="col citybg"></div>
-  </q-page>
+        <div class="col citybg"></div>
+      </q-page>
+    </q-page-container>
+  </q-layout>
 </template>
 <script setup>
 import { ref } from 'vue';

@@ -1,5 +1,5 @@
 <template>
-  <q-page class="flex column" :class="bgHome">
+  <q-page class="flex column">
     <div>
       <h3>Página inicial</h3>
       <q-btn color="primary" label="Weather App" @click="redirecionar" />
@@ -17,6 +17,6 @@ export default {
 };
 </script>
 <style lang="sass">
-.bgHome
+//.bgHome
   background:
 </style>
