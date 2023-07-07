@@ -9,6 +9,10 @@ const routes = [
     path: '/:weather-app',
     component: () => import('pages/WeatherApp.vue'),
   },
+  {
+    path: '/:gestor',
+    component: () => import('pages/GestorPdv.vue'),
+  },
   // Always leave this as last one,
   // but you can also remove it
   {
