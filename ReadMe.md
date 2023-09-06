@@ -1,3 +1,5 @@
+<!-- Ultima alteração -->
+<!-- Metodo genérico para mudança de pagina com carregamento de tela-->
 <template>
   <q-page class="flex column">
     <div class="text-center">
