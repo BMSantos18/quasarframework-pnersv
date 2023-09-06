@@ -7,7 +7,7 @@
       <q-btn
         color="primary"
         label="Weather App"
-        @click="redirecionar"
+        @click="redW"
         rounded
         class="q-mr-lg"
       />
@@ -19,19 +19,65 @@
         class="q-ml-lg"
       />
     </div>
+    <div class="q-pa-md">
+      <q-ajax-bar
+        ref="bar"
+        position="bottom"
+        color="accent"
+        size="10px"
+        skip-hijack
+      />
+    </div>
   </q-page>
 </template>
 
 <script>
+import { ref } from 'vue';
+
 export default {
   methods: {
-    // Método para redirecionar para outra página
-    redirecionar() {
+    // Método para redirecionar para outra página após a conclusão da barra de progresso
+    async redW() {
+      // Iniciar a barra de progresso
+      this.bar.start();
+
+      // Gerar um atraso aleatório entre 1 e 5 segundos (ou ajuste conforme necessário)
+      const delay = Math.random() * 3000 + 1000; // Entre 1000ms e 5000ms
+      await new Promise((resolve) => setTimeout(resolve, delay));
+
+      // Parar a barra de progresso
+      this.bar.stop();
+
+      // Aguardar um curto período adicional, se necessário
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
+      // Redirecionar para a página Weather App
       this.$router.push('/weather-app');
     },
-    redG() {
+    async redG() {
+      // Iniciar a barra de progresso
+      this.bar.start();
+
+      // Gerar um atraso aleatório entre 1 e 5 segundos (ou ajuste conforme necessário)
+      const delay = Math.random() * 3000 + 1000; // Entre 1000ms e 5000ms
+      await new Promise((resolve) => setTimeout(resolve, delay));
+
+      // Parar a barra de progresso
+      this.bar.stop();
+
+      // Aguardar um curto período adicional, se necessário
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
+      // Redirecionar para a página Gestor
       this.$router.push('/gestor');
     },
+  },
+  setup() {
+    const bar = ref(null);
+
+    return {
+      bar,
+    };
   },
 };
 </script>

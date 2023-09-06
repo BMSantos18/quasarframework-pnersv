@@ -154,9 +154,9 @@ export default {
 .degree
   top: -42px
 .citybg
-  background: url(../assets/silhouette2.png) no-repeat center bottom -2px
-  z-index: 999
-  background-size: contain
+  background: url(../assets/silhouette2.png) no-repeat center
+  background-position: bottom
+  background-size: 100% 10%
   background-attachment: fixed
 .maiuscula
   text-transform: capitalize
