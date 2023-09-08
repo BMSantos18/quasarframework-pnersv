@@ -107,6 +107,7 @@ export default {
   },
   methods: {
     getLocation() {
+      this.$q.loading.show();
       navigator.geolocation.getCurrentPosition((position) => {
         this.lat = position.coords.latitude;
         this.lon = position.coords.longitude;
@@ -114,19 +115,21 @@ export default {
       });
     },
     getWeatherByCoords() {
+      this.$q.loading.show();
       axios
         .get(
           `${this.apiUrl}?lat=${this.lat}&lon=${this.lon}&appid=${this.apiID}&lang=${this.lang}&units=metric`
         )
         .then((response) => {
-          console.log('response: ', response.data);
           this.weatherData = response.data;
+          this.$q.loading.hide();
         })
         .catch((error) => {
           console.error(error);
         });
     },
     getWeatherBySearch() {
+      this.$q.loading.show();
       axios
         .get(
           `${this.apiUrl}?q=${this.search}&lang=${this.lang}&appid=${this.apiID}&units=metric`
@@ -134,6 +137,7 @@ export default {
         .then((response) => {
           console.log('response: ', response.data);
           this.weatherData = response.data;
+          this.$q.loading.hide();
         })
         .catch((error) => {
           console.error(error);
@@ -154,10 +158,14 @@ export default {
 .degree
   top: -42px
 .citybg
-  background: url(../assets/silhouette2.png) no-repeat center
-  background-position: bottom
-  background-size: 100% 10%
-  background-attachment: fixed
+  flex: 0 0 100px
+  background: url(../assets/silhouette2.png) center
+  background-position: center bottom
+  background-size: contain
+  background-repeat: repeat-x // Evita repetição vertical
+
+
+
 .maiuscula
   text-transform: capitalize
 </style>
