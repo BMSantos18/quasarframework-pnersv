@@ -1,8 +1,30 @@
 <!-- Ultima alteração -->
 
+<!-- Alerada as rotas para uma página fixa, retirado os ":" antes do nome da pagina no "path". Resolvido problema do background da WeatherApp na HomePaga-->
 
+const routes = [
+{
+path: '/',
+component: () => import('layouts/MainLayout.vue'),
+children: [{ path: '', component: () => import('pages/HomePage.vue') }],
+},
+{
+path: '/weather-app', // Nome exclusivo para a rota do WeatherApp
+component: () => import('pages/WeatherApp.vue'),
+},
+{
+path: '/gestor',
+component: () => import('pages/GestorPdv.vue'),
+},
+// Always leave this as last one,
+// but you can also remove it
+{
+path: '/catchAll(._)_',
+component: () => import('pages/ErrorNotFound.vue'),
+},
+];
 
-
+export default routes;
 
 <!-- Metodo genérico para mudança de pagina com carregamento de tela-->
 <template>

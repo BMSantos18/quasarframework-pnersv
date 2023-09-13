@@ -17,6 +17,15 @@
           >
             <!-- Faz com que o ícone apareça antes do campo de texto -->
             <template v-slot:prepend>
+              <!-- -->
+              <q-btn
+                @click="redirectToHome()"
+                round
+                dense
+                flat
+                icon="arrow_back"
+              />
+
               <q-icon name="place" />
             </template>
             <!-- Faz com que o ícone apareça após o campo de texto -->
@@ -106,6 +115,19 @@ export default {
     },
   },
   methods: {
+    redirectToHome() {
+      this.$q.loading.show();
+
+      // Remover a classe de fundo da WeatherApp
+      this.bgClass = 'bg-homepage';
+
+      // Redirecionar o usuário para a Homepage após um curto período
+      setTimeout(() => {
+        this.$router.push('/');
+        this.$q.loading.hide();
+      }, 100);
+    },
+
     getLocation() {
       this.$q.loading.show();
       navigator.geolocation.getCurrentPosition((position) => {

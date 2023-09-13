@@ -3,7 +3,7 @@
     <!-- Resto do conteúdo do layout -->
     <q-page-container>
       <q-page class="flex column">
-        <div>teste</div>
+        <div>Teste Page</div>
       </q-page>
     </q-page-container>
   </q-layout>

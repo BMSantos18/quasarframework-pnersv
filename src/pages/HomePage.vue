@@ -1,8 +1,9 @@
 <template>
-  <q-page class="flex column">
+  <q-page class="flex column bg-homepage">
     <div class="text-center">
       <h3 id="text">Página inicial</h3>
     </div>
+
     <div class="q-ml-lg q-mr-lg">
       <q-btn
         color="primary"
@@ -38,9 +39,20 @@ export default {
   methods: {
     // Método genérico para redirecionar com barra de progresso
     async redirectTo(route) {
-      this.$q.loading.show();
+      // Iniciar a barra de progresso
+      this.bar.start();
+      // Gerar um atraso aleatório entre 1 e 2 segundos (ou ajuste conforme necessário)
+      const delay = Math.random() * 1000 + 1000; // Entre 1000ms e 5000ms
+      await new Promise((resolve) => setTimeout(resolve, delay));
+
+      // Parar a barra de progresso
+      this.bar.stop();
+
+      // Aguardar um curto período adicional, se necessário
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
+      // Redirecionar para a página especificada
       this.$router.push(route);
-      this.$q.loading.hide();
     },
   },
   setup() {
@@ -55,8 +67,9 @@ export default {
 
 <style lang="sass">
 .q-page
-  background: linear-gradient(to bottom, #141e30, #243b55)
+  #text
+    color: white
 
-#text
-  color: white
+.bg-homepage
+  background: linear-gradient(to bottom, #141e30, #243b55)
 </style>
