@@ -58,7 +58,7 @@
           <!-- Imagem sendo buscada pela API, onde mostra o tipo de tempo no local informado -->
           <div class="col text-center">
             <img
-              :src="`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`"
+              :src="`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`"
             />
           </div>
         </template>
